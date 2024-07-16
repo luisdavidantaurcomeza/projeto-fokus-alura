@@ -1,0 +1,447 @@
+Exercicios resolver:
+
+1) Capturando elementos com JavaScript
+Você está trabalhando no projeto Fokus, um aplicativo de cronômetro, onde será possível clicar no botão “Iniciar”, para iniciar e pausar um cronômetro. Para realizar o passo a passo, seu primeiro objetivo é implementar métodos do JavaScript que permitam selecionar os seguintes elementos do HTML:
+
+O documento HTML, onde serão manipulados os elementos;
+O elemento HTML em que irá aparecer o temporizador;
+O elemento HTML no qual as imagens de cada contexto irão trocar de posição;
+O elemento HTML onde as frases de cada contexto irão trocar de posição.
+Vamos lá?
+
+2) Criando variáveis no JavaScript
+Com os elementos selecionados (conforme visto no exercício anterior), a próxima etapa é guardar cada um desses elementos em variáveis para serem utilizados posteriormente no sistema que você está desenvolvendo. Para verificar se as variáveis estão corretas, utilize o console do navegador, por exemplo: console.log(nome-da-variável).
+
+3) Criando botões da aplicação
+Já definimos vários elementos que serão modificados no projeto “Fokus”, porém essas mudanças irão acontecer a partir do click em botões. Nesta etapa do projeto, crie as variáveis dos 4 (quatro) botões que vamos utilizar:
+
+Botão que servirá para iniciar e pausar o temporizador;
+Botão para escolher o temporizador de “Foco”;
+Botão para escolher o temporizador de “Descanso curto”;
+Botão para escolher o temporizador de “Descanso longo”.
+4) Selecionando botões com JavaScript
+Até essa etapa, você já selecionou diversos elementos e os guardou em variáveis. Agora, crie variáveis com o tempo de cada tipo de temporizador:
+
+Temporizador de foco com valor 1500;
+Temporizador de descanso curto com valor 300;
+Temporizador de descanso longo com valor 900.
+Esses valores serão convertidos em segundos posteriormente.
+
+1) Capturando elementos com JavaScript
+Veja como podemos capturar elementos com o Javascript:
+
+Abra o projeto no VSCode;
+Identifique, no arquivo HTML, os elementos solicitados no enunciado da atividade;
+Utilize métodos como querySelector(), getElementsByClassName() para referenciar cada um dos elementos.
+Veja abaixo os códigos que realizam a captura:
+document.querySelector('html');
+document.querySelector('#timer');
+document.querySelector('.app__image');
+document.querySelector('.app__title');
+COPIAR CÓDIGO
+2) Criando variáveis no JavaScript
+Neste exercício, a ideia é que você crie cada uma das variáveis solicitadas, realizando referência aos elementos HTML.
+
+const html = document.querySelector('html');
+const displayTempo = document.querySelector('#timer');
+const banner = document.querySelector('.app__image');
+const titulo = document.querySelector('.app__title')
+COPIAR CÓDIGO
+3) Criando botões da aplicação
+Criar botões é uma habilidade essencial em Javascript. Para fazer isso, crie variáveis para guardar os botões para cada tipo de temporizador, “Foco”, “Descanso curto” e “Descanso longo”, além do botão para iniciar o temporizador:
+
+const botaoIniciar = document.querySelector('.app__card-primary-button');
+const focoBt = document.querySelector('.app__card-button--foco')
+const curtoBt = document.querySelector('.app__card-button--curto')
+const longoBt = document.querySelector('.app__card-button--longo')
+COPIAR CÓDIGO
+4) Selecionando botões com JavaScript
+Crie três variáveis com o nome ideal para cada contexto e guarde seus valores:
+
+const duracaoFoco = 1500; 
+const duracaoDescansoCurto = 300; 
+const duracaoDescansoLongo = 900; 
+
+**********************************************************************************************************************************************************************************
+1) Criando funções no JavaScript
+Na construção do projeto Fokus, crie uma função chamada alterarContexto() que altera o caminho da imagem e a cor de fundo, de acordo com o contexto de cada um dos três temporizadores: “Foco”, “Descanso curto” e “Descanso longo”.
+
+2) Alterando imagens e estilos dinamicamente
+A próxima etapa da construção do projeto Fokus é a seguinte: utilize a função alterarContexto(), criada anteriormente, para adicionar um evento de click, alterando o contexto de imagem e cor de fundo, de acordo com o clique em cada um dos botões de foco.
+
+3) Alterando textos dinamicamente
+Até esta etapa de desenvolvimento do projeto Fokus, o código teve algumas repetições que podem ser melhoradas. Vamos corrigir isso? Assim, refatore o código, passando os valores de cada contexto dinamicamente na forma de parâmetro para a função alterarContexto(). Além disso, insira frases de acordo com cada contexto, através da variável titulo (já criada):
+
+O contexto de foco terá a frase: “Otimize sua produtividade, mergulhe no que importa.”
+O contexto de descanso curto terá a frase: “Que tal dar uma respirada? Faça uma pausa curta!”
+O contexto de descanso longo terá a frase: “Hora de voltar à superfície. Faça uma pausa longa.”
+
+respostas: 
+1) Criando funções no JavaScript
+Utilize o método do JavaScript setAttribute para alterar elementos HTML dinamicamente. O código pode ficar assim:
+
+function alterarContexto(contexto, imagem) {
+    html.setAttribute('data-contexto', contexto);
+    banner.setAttribute('src', `/imagens/${imagem}`);
+  }
+COPIAR CÓDIGO
+2) Alterando imagens e estilos dinamicamente
+Crie eventos de clique para cada um dos três contextos do projeto, alterando a classe com os estilos de cor de fundo, e o caminho das imagens de cada contexto:
+
+  const focoBt = document.querySelector('.app__card-button--foco');
+  focoBt.addEventListener('click', () => {
+    alterarContexto('foco', 'foco.png');
+  });
+  
+  const curtoBt = document.querySelector('.app__card-button--curto');
+  curtoBt.addEventListener('click', () => {
+    alterarContexto('descanso-curto', 'descanso-curto.png');
+  });
+  
+  const longoBt = document.querySelector('.app__card-button--longo');
+  longoBt.addEventListener('click', () => {
+    alterarContexto('descanso-longo', 'descanso-longo.png');
+  });
+COPIAR CÓDIGO
+3) Alterando textos dinamicamente
+Para alterar os textos dinamicamente, podemos prosseguir com o seguinte código:
+
+focoBt.addEventListener('click', () => {
+    alterarContexto('foco')
+})
+
+curtoBt.addEventListener('click', () => {
+    alterarContexto('descanso-curto')
+})
+
+longoBt.addEventListener('click', () => {
+    alterarContexto('descanso-longo')
+})
+
+function alterarContexto(contexto) {
+    html.setAttribute('data-contexto', contexto)
+    banner.setAttribute('src', `/imagens/${contexto}.png`)
+    switch (contexto) {
+        case "foco":
+            titulo.innerHTML = `
+            Otimize sua produtividade,<br>
+                <strong class="app__title-strong">mergulhe no que importa.</strong>
+            `
+            break;
+        case "descanso-curto":
+            titulo.innerHTML = `
+            Que tal dar uma respirada? <strong class="app__title-strong">Faça uma pausa curta!</strong>
+            ` 
+            break;
+        case "descanso-longo":
+            titulo.innerHTML = `
+            Hora de voltar à superfície.<strong class="app__title-strong"> Faça uma pausa longa.</strong>
+            `
+        default:
+            break;
+    }
+}
+
+************************************************************************************************************************************************************
+1) Inserindo estilos dos botões com JavaScript
+Crie uma página HTML simples que inclua três botões: "Foco", "Descanso Curto" e "Descanso Longo" (o layout não precisa ser muito complexo). Cada botão deve inicialmente ter um estilo básico. Utilize o JavaScript para inserir a classe active entre esses botões, de modo que, ao clicar em um botão, ele receba um estilo destacado (por exemplo, cor de fundo e borda diferenciada). Certifique-se de aplicar os conceitos de manipulação de classes com JavaScript aprendidos, alterando dinamicamente a classe active para indicar o botão selecionado.
+
+2) Alternando o estilo dos botões com JavaScript
+Com o método para aplicar a classe active nos três botões definidos no exercício anterior, repare no seguinte: sempre quando um botão é clicado, o estilo é inserido. Para corrigir isso, aplique, na função alterarContexto, um método para retirar a classe active de modo que ela seja inserida apenas no último botão clicado.
+
+3) Controlando a reprodução de música com um Checkbox
+Desenvolva, no projeto Fokus, um input do tipo checkbox para controlar a reprodução de um arquivo de música. O arquivo de áudio, luna-rise-part-one.mp3, deve começar a tocar quando o checkbox for marcado e parar quando for desmarcado. Implemente essa lógica usando o JavaScript, criando um objeto Audio para o arquivo de música e um EventListener para o checkbox que verifica o estado da propriedade paused do objeto Audio, alternando entre os métodos play e pause conforme o estado do checkbox.
+
+4) Reproduzindo arquivo de Audio em modo infinito
+Você já aprendeu como inserir arquivos de Audio em um projeto utilizando JavaScript, e também aplicou métodos para reproduzir e pausar esse tipo de arquivo. Nesse momento, você deve utilizar das técnicas aplicadas nesta aula para fazer um arquivo de Audio ser reproduzido em modo de loop, ou seja, iniciando automaticamente sempre que finalizado.
+
+
+respostas:
+1) Alternando o estilo dos botões com JavaScript
+Crie um arquivo HTML e adicione três botões com os textos "Foco", "Descanso Curto" e "Descanso Longo". Adicione uma classe base aos botões para estilos iniciais e uma classe active para estilos destacados;
+Utilize CSS para definir os estilos básicos dos botões e os estilos quando a classe active estiver aplicada;
+Em um arquivo JavaScript separado, escreva o código para adicionar um event listener a cada botão. Quando um botão é clicado, ele deve receber a classe active, enquanto os outros botões devem ter essa classe removida.
+Código JavaScript:
+
+focoBt.addEventListener('click', () => {
+    alterarContexto('foco')
+    focoBt.classList.add('active')
+})
+
+curtoBt.addEventListener('click', () => {
+    alterarContexto('descanso-curto')
+    curtoBt.classList.add('active')
+})
+
+longoBt.addEventListener('click', () => {
+    alterarContexto('descanso-longo')
+    longoBt.classList.add('active')
+})
+COPIAR CÓDIGO
+2) Alternando o estilo dos botões com JavaScript
+Crie uma variável para selecionar todos os três botões;
+Insira na função alterarContexto o método para retirar a classe active dos botões.
+O código Javascript ficaria assim:
+
+const botoes = document.querySelectorAll('.app__card-button')
+
+    botoes.forEach(function (contexto){
+        contexto.classList.remove('active')
+    })
+COPIAR CÓDIGO
+3) Controlando a reprodução de música com um Checkbox
+Adicione um input do tipo checkbox com um ID específico, por exemplo, #alternar-musica;
+No seu arquivo JavaScript, crie uma variável para armazenar a referência ao checkbox usando document.querySelector('#alternar-musica');
+Crie um objeto Audio para o arquivo de música desejado, passando o caminho do arquivo como parâmetro para o construtor new Audio('caminho/do/arquivo.mp3');
+Adicione um EventListener ao checkbox para escutar pelo evento change. Dentro do callback deste evento, utilize a propriedade paused do objeto Audio para verificar se a música está pausada. Se estiver, chame o método play(), caso contrário, chame pause().
+O código JavaScript ficaria assim:
+
+        const musicaFocoInput = document.querySelector('#alternar-musica');
+        const musica = new Audio('sons/luna-rise-part-one.mp3');
+
+        musicaFocoInput.addEventListener('change', () => {
+            if (musica.paused) {
+                musica.play();
+            } else {
+                musica.pause();
+            }
+        });
+COPIAR CÓDIGO
+4) Reproduzindo arquivo de Audio em modo infinito
+Aplique na propriedade loop do objeto JavaScript Audio o valor true. O código JavaScript:
+
+musica.loop = true
+
+
+**********************************************************************************************************************************************************
+
+
+1) Iniciando a contagem regressiva automaticamente
+Desenvolva uma função que inicie automaticamente a contagem regressiva do temporizador. Use setInterval() para diminuir o tempo a cada segundo e exiba o tempo no console do navegador.
+
+2) Pausando a contagem regressiva a partir do clique
+Nesta etapa do desenvolvimento do projeto Fokus, refatore o código desenvolvido até o momento, inserindo a funcionalidade de pausar a contagem, a partir do clique no botão.
+
+3) Controlando o temporizador com som
+Para tornar a experiência mais interativa, você decide integrar efeitos sonoros específicos que serão reproduzidos em ações como iniciar e pausar o temporizador, além de um som especial quando o tempo se esgota. Sua tarefa é implementar essa funcionalidade usando JavaScript, 
+garantindo que os sons corretos sejam tocados nos momentos apropriados.
+
+
+respostas:
+1) Iniciando a contagem regressiva automaticamente
+O código JavaScript ficaria assim:
+
+const contagemRegressiva = () => {
+    if(tempoDecorridoEmSegundos <= 0){
+        // audioTempoFinalizado.play()
+        alert('Tempo finalizado!')
+        zerar()
+        return
+    }
+    tempoDecorridoEmSegundos -= 1
+    console.log('Temporizador: ' + tempoDecorridoEmSegundos)
+}
+
+startPauseBt.addEventListener('click', iniciarOuPausar)
+
+function iniciarOuPausar() {
+    if(intervaloId){
+        // audioPausa.play()
+        zerar()
+        return
+    }
+    audioPlay.play()
+    intervaloId = setInterval(contagemRegressiva, 1000)
+}
+COPIAR CÓDIGO
+2) Pausando a contagem regressiva a partir do clique
+O código JavaScript ficaria assim:
+
+const contagemRegressiva = () => {
+    if(tempoDecorridoEmSegundos <= 0){
+        alert('Tempo finalizado!')
+        zerar()
+        return
+    }
+    tempoDecorridoEmSegundos -= 1
+    console.log('Temporizador: ' + tempoDecorridoEmSegundos)
+}
+
+startPauseBt.addEventListener('click', iniciarOuPausar)
+
+function iniciarOuPausar() {
+    if(intervaloId){
+        zerar()
+        return
+    }
+    intervaloId = setInterval(contagemRegressiva, 1000)
+}
+
+function zerar() {
+    clearInterval(intervaloId) 
+    intervaloId = null
+}
+COPIAR CÓDIGO
+3) Controlando o temporizador com som
+O código JavaScript ficaria assim:
+
+const audioPlay = new Audio('/sons/play.wav');
+const audioPausa = new Audio('/sons/pause.mp3');
+const audioTempoFinalizado = new Audio('./sons/beep.mp3')
+
+const contagemRegressiva = () => {
+    if(tempoDecorridoEmSegundos <= 0){
+        audioTempoFinalizado.play()   // áudio executado quando cronômetro finalizar
+        alert('Tempo finalizado!')
+        zerar()
+        return
+    }
+    tempoDecorridoEmSegundos -= 1
+    console.log('Temporizador: ' + tempoDecorridoEmSegundos)
+}
+
+startPauseBt.addEventListener('click', iniciarOuPausar)
+
+function iniciarOuPausar() {
+    if(intervaloId){
+        audioPausa.play()   // áudio executado quando cronômetro for pausado
+        zerar()
+        return
+    }
+    audioPlay.play()   // áudio executado quando cronômetro iniciar
+    intervaloId = setInterval(contagemRegressiva, 1000)
+}
+
+function zerar() {
+    clearInterval(intervaloId) 
+    intervaloId = null
+}
+
+*******************************************************************************************************************************************************************
+
+1) Alterando textos e ícones dinamicamente
+A tarefa consiste em utilizar JavaScript para implementar uma lógica que altere o texto e o ícone inserido no botão que inicia e pausa o temporizador do projeto Fokus. Inicialmente ele tem escrito “Começar” com ícone de play, implemente uma lógica que altere o texto para “Pausar” com ícone de pause, sempre que o temporizador for iniciado.
+
+2) Mostrando temporizador na tela
+Até esta etapa do projeto Fokus, é possível mostrar o tempo no console do navegador. Sua próxima missão é mostrar o temporizador na tela, na div com o ID #timer. Logo, utilize o método innerHTML para inserir elementos na tela e o objeto do JavaScript new Date.
+
+3) Formatando minuto/segundo com JavaScript
+Já é possível mostrar o temporizador na tela, entretanto, o formato de minutos e segundos precisa ser configurado. Sua missão nessa etapa é configurar o formato para “00:00”, onde os minutos aparecem no lado esquerdo e os segundos no lado direito.
+
+4) Alterando o cronômetro do temporizador
+Você está na última etapa de desenvolvimento do projeto Fokus. O próximo passo é implementar o contexto de temporizador para cada cronômetro para cada formato:
+
+Ao clicar no botão “Focus” o temporizador deve ser em 1500 segundos;
+Ao clicar no botão “Descanso curto” o temporizador deve ser em 300 segundos;
+Ao clicar no botão “Descanso longo” o temporizador deve ser em 900 segundos.
+
+
+
+respostas:
+
+1) Alterando textos e ícones dinamicamente
+Utilize a propriedade textContent para inserir as palavras “Pausar” e “Começar”;
+Utilize o método setAttribute para alterar as imagens de ícones de “Play” e “Pause”.
+O código JavaScript ficaria assim:
+
+//Restante do código oculto
+startPauseBt.addEventListener('click', iniciarOuPausar)
+
+const iniciarOuPausarBt = document.querySelector('#start-pause span')
+const iniciarOuPausarBtIcone = document.querySelector(".app__card-primary-butto-icon") 
+function iniciarOuPausar() {
+    if(intervaloId){
+        audioPausa.play()   
+        zerar()
+        return
+    }
+    audioPlay.play()   
+    intervaloId = setInterval(contagemRegressiva, 1000)
+    iniciarOuPausarBt.textContent = "Pausar"  // Altera o texto para "Pausar"
+    iniciarOuPausarBtIcone.setAttribute('src', `/imagens/pause.png`)  // Altera para o ícone de pause
+}
+
+function zerar() {
+    clearInterval(intervaloId) 
+    iniciarOuPausarBt.textContent = "Começar"  // Retorna a palavra "Começar" quando o temporizador for pausado
+    iniciarOuPausarBtIcone.setAttribute('src', `/imagens/play_arrow.png`)  // Altera para o ícone de play
+    intervaloId = null
+}
+COPIAR CÓDIGO
+2) Mostrando temporizador na tela
+Crie uma função chamada “mostrarTempo()` para criar a funcionalidade de mostrar o tempo na tela;
+Chame a função mostrarTempo dentro da função contagemRegressiva para ser executada apenas quando a contagem regressiva for realizada.
+O código JavaScript ficaria assim:
+
+const contagemRegressiva = () => {
+    if(tempoDecorridoEmSegundos <= 0){
+        audioTempoFinalizado.play()   
+        alert('Tempo finalizado!')
+        zerar()
+        return
+    }
+    tempoDecorridoEmSegundos -= 1
+    mostrarTempo()   // Chamando a função mostrarTempo na contagem regressiva
+}
+
+startPauseBt.addEventListener('click', iniciarOuPausar)
+
+const iniciarOuPausarBt = document.querySelector('#start-pause span')
+const iniciarOuPausarBtIcone = document.querySelector(".app__card-primary-butto-icon") 
+function iniciarOuPausar() {
+    if(intervaloId){
+        audioPausa.play()   
+        zerar()
+        return
+    }
+    audioPlay.play()   
+    intervaloId = setInterval(contagemRegressiva, 1000)
+    iniciarOuPausarBt.textContent = "Pausar"  
+    iniciarOuPausarBtIcone.setAttribute('src', `/imagens/pause.png`) 
+}
+
+function zerar() {
+    clearInterval(intervaloId) 
+    iniciarOuPausarBt.textContent = "Começar"      iniciarOuPausarBtIcone.setAttribute('src', `/imagens/play_arrow.png`)     intervaloId = null
+}
+
+const tempoNaTela = document.querySelector('#timer')
+
+function mostrarTempo() {   // criando função para mostrar tempo na tela
+    const tempo = new Date(tempoDecorridoEmSegundos * 1000)
+    tempoNaTela.innerHTML = `${tempo}`
+}
+
+mostrarTempo()
+COPIAR CÓDIGO
+3) Formatando minuto/segundo com JavaScript
+Utilize o método toLocaleTimeString para definir o formato de minutos e segundos do temporizador. O código JavaScript ficaria assim:
+
+function mostrarTempo() {
+    const tempo = new Date(tempoDecorridoEmSegundos * 1000)
+    const tempoFormatado = tempo.toLocaleTimeString('pt-Br', {minute: '2-digit', second: '2-digit'})  //Formatando tempo na tela
+    tempoNaTela.innerHTML = `${tempoFormatado}`
+}
+
+mostrarTempo()
+COPIAR CÓDIGO
+4) Alterando o cronômetro do temporizador
+Guarde cada variável, que guarda os segundos de cada contexto, no respectivo evento de clique do botão. O código JavaScript ficaria assim:
+
+focoBt.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 1500
+    alterarContexto('foco')
+    focoBt.classList.add('active')
+})
+
+curtoBt.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 300
+    alterarContexto('descanso-curto')
+    curtoBt.classList.add('active')
+})
+
+longoBt.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 900
+    alterarContexto('descanso-longo')
+    longoBt.classList.add('active')
+})
